@@ -16,9 +16,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return UserModel(
-      fullname: fields[0] as String,
-    );
+    return UserModel(fullName: fields[0] as String);
   }
 
   @override
@@ -26,7 +24,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
     writer
       ..writeByte(1)
       ..writeByte(0)
-      ..write(obj.fullname);
+      ..write(obj.fullName);
   }
 
   @override

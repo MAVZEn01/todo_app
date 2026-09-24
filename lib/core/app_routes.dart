@@ -1,5 +1,5 @@
 abstract class AppRoutes {
-  static String profile = "Profile";
-  static String home = "Home";
-  static String addtask = "task";
+  static const String profile = '/';
+  static const String home = '/home';
+  static const String addTask = '/add-task';
 }

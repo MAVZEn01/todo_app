@@ -1,5 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:todo_app/core/app_routes.dart';
+import 'package:todo_app/data/model/user_model.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -46,7 +51,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             SizedBox(height: 20),
             MaterialButton(
-              onPressed: () {},
+              onPressed: () async {
+                log(fullName.text);
+                var userbox = Hive.box<UserModel>('user');
+                await userbox
+                    .put("UserKey", UserModel(fullname: fullName.text))
+                    .then((value) {
+                      Navigator.of(context).pushNamed(AppRoutes.home);
+                    })
+                    .catchError((eror) {
+                      log(eror);
+                    });
+              },
               color: Color(0xff3f51b5),
               padding: EdgeInsets.all(10),
               minWidth: 300,
